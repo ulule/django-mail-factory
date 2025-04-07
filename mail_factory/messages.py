@@ -4,7 +4,7 @@ from email.mime.base import MIMEBase
 from os.path import basename
 
 from django.conf import settings
-from django.core.mail import EmailMultiAlternatives, SafeMIMEMultipart
+from django.core.mail import EmailMultiAlternatives, SafeMIMEMultipart, EmailAlternative
 
 
 # http://djangosnippets.org/snippets/2215/
@@ -80,7 +80,7 @@ class EmailMultiRelated(EmailMultiAlternatives):
                         "cid:%s" % filename,
                         content,
                     )
-                self.alternatives[i] = (content, mimetype)
+                self.alternatives[i] = EmailAlternative(content, mimetype)
 
         return super(EmailMultiRelated, self)._create_alternatives(msg)
 
